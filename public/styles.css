@@ -1,0 +1,42 @@
+/* RESET */
+* {
+	margin: 0;
+	padding: 0;
+
+	box-sizing: border-box;
+	object-fit: cover;
+
+    font-family: Arial, sans-serif;
+}
+
+
+h1 {
+    color: brown;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* main {
+    --x: 10%;
+    --y: 20%;
+} */
+
+
+.profile-bubble {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: blueviolet;
+    height: 5.5em;
+    width: 5.5em;
+    border-radius: 50%;
+
+    transform: translate(var(--x), var(--y));
+    transition: 2s linear;
+}
+
