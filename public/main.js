@@ -5,34 +5,25 @@ cirkels = document.querySelectorAll(".profile-bubble")
 setPropertyXY()
 let cirkelAnimation = setInterval(setPropertyXY, 10000);
 
-// event listener op elke cirkel
+// Bij een click stopt de cirkel met bewege, en gaat het open
 cirkels.forEach(cirkel => {
     // stop de animatie bij een hover
     cirkel.addEventListener("click", () => {
-        clearInterval(cirkelAnimation)
-        console.log("ai wroko")
-        // cirk.style.setProperty('--size-circle', 20 + 'em')
         cirkel.classList.toggle("open")
     });
-
-    // // start de animatie opniew wanneer er geen hover is
-    // cirk.addEventListener("mouseleave", () => {
-    //     cirkelAnimation = setInterval(setPropertyXY, 1000);
-    // });
 });
 
 
-// genereer een random x & y voor elke cirkel
+// genereer random getallen, seconden, voor de keyframe animatie
 function setPropertyXY() {
     cirkels.forEach(cirkel => {
         // https://www.w3schools.com/js/js_random.asp
-        // genereer een random getal tussen 0 en 100
         durX = Math.floor(Math.random() * 20);
         durY = Math.floor(Math.random() * 20);
-
         // z-index
         z = Math.floor(Math.random() * 100);
-    
+
+        // maak custom properties van de random seconden
         cirkel.style.setProperty('--durX', durX)
         cirkel.style.setProperty('--durY', durY)
         cirkel.style.setProperty('--z', z)
