@@ -10,13 +10,66 @@
 }
 
 
-h1 {
-    color: brown;
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        margin: 0.5em 0;
+    }
+
+    .random-ilw {
+        margin-bottom: 1em;
+        text-decoration: none;
+        background-color: var(--fav_color);
+        color: black;
+        padding: 0.5em;
+        border-radius: 15px;
+
+        &:hover {
+            filter: brightness(50%);
+        }
+    }
+
+    .filters {
+        display: flex;
+        flex-direction: column;
+
+        summary {
+            list-style: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        h2 {
+            align-self: center;
+            margin-bottom: 0.5em;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+            gap: 1em;
+
+            a {
+                text-decoration: none;
+                color: black;
+                padding: 0.5em 0.5em;
+                background-color: lightgray;
+                border-radius: 15px;
+
+                /* https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness */
+                &:hover {
+                    filter: brightness(50%);
+                }
+            }
+        }
+    }
 }
 
-a {
-    text-decoration: none;
-}
+
 
 .profile-bubble {
     --size-circle: 8em;
@@ -26,11 +79,6 @@ a {
     justify-content: center;
     align-items: center;
     position: absolute;
-    
-    /* center van de pagina
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
 
     /* de fav_color uit Whois, wordt in HTML gemaakt tot een custom property, die hier gebruikt wordt */
     background-color: var(--fav_color);
@@ -40,14 +88,24 @@ a {
 
     z-index: var(--z);
 
-    animation:
+    /* animation:
     transX calc(var(--durX) * 1s) linear infinite alternate,
-    transY calc(var(--durY) * 1s) linear infinite alternate;
+    transY calc(var(--durY) * 1s) linear infinite alternate; */
 
-    span {
+    .name {
         width: 5em;
         text-wrap: wrap;
         text-align: center;
+        color: white;
+    }
+
+    .squad {
+        display: none;
+        color: white;
+    }
+
+    .website {
+        display: none;
         color: white;
     }
 
@@ -55,6 +113,7 @@ a {
     /* https://stackoverflow.com/questions/75906720/how-to-make-css-animation-slows-down-to-stop-on-hover-and-continue-moving-infin */
     &:hover {
         animation-play-state: paused;
+        filter: brightness(1.2);
     }
 }
 
@@ -62,10 +121,39 @@ a {
     animation: none;
     z-index: 101;
 
-    height: 5em;
+    height: 8em;
     width: 20em;
     border-radius: 15px;
 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: grid;
+    grid-template-columns: min-content 1fr 4em;
+    grid-template-rows: 1fr 1fr;
+
+    svg {
+        align-self: end;
+    }
+
+    .name {
+        text-wrap: nowrap;
+        align-self: end;
+        margin-left: 1em;
+    }
+
+    .squad {
+        display: block;
+        align-self: end;
+    }
+
+    .website {
+        display: block;
+        grid-area: 2 / 2;
+        text-wrap: nowrap;
+        margin-left: 1em;
+    }
 }
 
 

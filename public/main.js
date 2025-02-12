@@ -1,13 +1,13 @@
 // selecteer alle cirkels
 cirkels = document.querySelectorAll(".profile-bubble")
 
-// genereer nieuwe x & y om de 2s
+// genereer nieuwe custom properties om de 10s
 setPropertyXY()
-let cirkelAnimation = setInterval(setPropertyXY, 10000);
+// let cirkelAnimation = setInterval(setPropertyXY, 10000);
 
-// Bij een click stopt de cirkel met bewege, en gaat het open
+
+// Bij een click wordt een class toegevoegd aan de ge-klikte cirkel
 cirkels.forEach(cirkel => {
-    // stop de animatie bij een hover
     cirkel.addEventListener("click", () => {
         cirkel.classList.toggle("open")
     });
