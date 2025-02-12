@@ -37,16 +37,23 @@ app.use(express.urlencoded({extended: true}))
 // Maak een GET route voor de index
 app.get('/', async function (request, response) {
   // Haal alle personen uit de WHOIS API op, van dit jaar
-  const personResponse = await fetch('https://fdnd.directus.app/items/person/?fields=*,squads.squad_id.name,squads.squad_id.cohort&filter={"_and":[{"squads":{"squad_id":{"tribe":{"name":"FDND Jaar 1"}}}},{"squads":{"squad_id":{"cohort":"2425"}}}]}')
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}')
   // En haal daarvan de JSON op
   const personResponseJSON = await personResponse.json()
-  
+
+  let data = personResponseJSON.data
+  // let custom = (data.custom)
+  // let customParse = JSON.parse(custom);
+
+  // id, name, fav color en birthdate die niet null zijn
+  // https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}
+
   // personResponseJSON bevat gegevens van alle personen uit alle squads van dit jaar
   // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  response.render('index.liquid', {persons: data})
 })
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
