@@ -1,8 +1,9 @@
 // selecteer alle cirkels
 cirkels = document.querySelectorAll(".profile-bubble")
 
-// genereer nieuwe custom properties om de 10s
+// genereer nieuwe custom properties
 setPropertyXY()
+// genereer nieuwe custom properties om de 10s
 // let cirkelAnimation = setInterval(setPropertyXY, 10000);
 
 

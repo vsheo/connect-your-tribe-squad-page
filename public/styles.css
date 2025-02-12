@@ -14,6 +14,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2em;
 
     h1 {
         margin: 0.5em 0;
@@ -88,9 +89,9 @@ header {
 
     z-index: var(--z);
 
-    /* animation:
+    animation:
     transX calc(var(--durX) * 1s) linear infinite alternate,
-    transY calc(var(--durY) * 1s) linear infinite alternate; */
+    transY calc(var(--durY) * 1s) linear infinite alternate;
 
     .name {
         width: 5em;
@@ -156,6 +157,37 @@ header {
     }
 }
 
+.profile-card {
+    background-color: antiquewhite;
+    width: 15em;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 1em;
+    margin-left: 1em;
+    padding: 0.5em 0;
+    padding-left: 0.3em;
+    border-left: 7px solid var(--fav_color);
+
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: 1fr 1fr;
+
+    .name {
+        align-self: center;
+    }
+
+    .squad {
+        align-self: center;
+        padding-right: 1em;
+    }
+
+    .website {
+        grid-area: 2 / 2;
+        align-self: center;
+        text-wrap: nowrap;
+    }
+}
+
 
 @keyframes transX {
     0% {
@@ -171,6 +203,6 @@ header {
       transform:translatey(0);
     }
     100% {
-      transform:translatey( calc(100dvh - var(--size-circle) - 6em) );
+      transform:translatey( calc(100dvh - var(--size-circle) - 12em) );
     }
   }

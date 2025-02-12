@@ -41,10 +41,6 @@ app.get('/', async function (request, response) {
   // En haal daarvan de JSON op
   const personResponseJSON = await personResponse.json()
 
-  let data = personResponseJSON.data
-  // let custom = (data.custom)
-  // let customParse = JSON.parse(custom);
-
   // id, name, fav color en birthdate die niet null zijn
   // https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}
 
@@ -53,7 +49,8 @@ app.get('/', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: data})
+  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+
 })
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
@@ -64,15 +61,15 @@ app.post('/', async function (request, response) {
 })
 
 // Maak een GET route voor een detailpagina met een request parameter id
-app.get('/detail/:id', async function (request, response) {
+app.get('/detail', async function (request, response) {
   // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
-  const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/' + request.params.id)
+  const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}')
   // En haal daarvan de JSON op
   const personDetailResponseJSON = await personDetailResponse.json()
   
   // Render detail.liquid uit de views map en geef de opgehaalde data mee als variable, genaamd person
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('detail.liquid', {person: personDetailResponseJSON.data, squads: squadResponseJSON.data})
+  response.render('detail.liquid', {persons: personDetailResponseJSON.data, squads: squadResponseJSON.data})
 })
 
 // Stel het poortnummer in waar express op moet gaan luisteren
