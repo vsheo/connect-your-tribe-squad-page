@@ -207,6 +207,6 @@ header {
       transform:translatey(0);
     }
     100% {
-      transform:translatey( calc(100dvh - var(--size-circle) - 12em) );
+      transform:translatey( calc(100dvh - var(--size-circle) - 15em) );
     }
   }
