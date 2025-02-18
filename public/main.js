@@ -19,8 +19,8 @@ cirkels.forEach(cirkel => {
 function setPropertyXY() {
     cirkels.forEach(cirkel => {
         // https://www.w3schools.com/js/js_random.asp
-        durX = Math.floor(Math.random() * 20);
-        durY = Math.floor(Math.random() * 20);
+        durX = Math.floor(Math.random() * 10);
+        durY = Math.floor(Math.random() * 10);
         // z-index
         z = Math.floor(Math.random() * 100);
 
