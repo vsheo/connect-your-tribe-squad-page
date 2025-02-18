@@ -188,7 +188,43 @@ header {
 }
 
 
+/* ##################################### visitekaartjes pagina ##################################### */
+.visite-main {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(23em, 1fr));
+	place-items: center;
 
+	.profile-card {
+		background-color: antiquewhite;
+		width: clamp(10em, 80%, 25em);;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+		margin-bottom: 1em;
+		margin-left: 1em;
+		padding: 0.5em 0;
+		padding-left: 0.3em;
+		border-left: 7px solid var(--fav_color);
+	
+		display: grid;
+		grid-template-columns: min-content 1fr min-content;
+		grid-template-rows: 1fr 1fr;
+	
+		.name {
+			align-self: center;
+		}
+	
+		.squad {
+			align-self: center;
+			padding-right: 1em;
+		}
+	
+		.website {
+			grid-area: 2 / 2;
+			align-self: center;
+			text-wrap: nowrap;
+		}
+	}
+}
 
 
 
