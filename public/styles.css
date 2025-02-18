@@ -191,12 +191,15 @@ header {
 /* ##################################### visitekaartjes pagina ##################################### */
 .visite-main {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(23em, 1fr));
-	place-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(22.5em, 1fr));
+
+	@media (min-width: 350px) {
+		place-items: center;
+	}
 
 	.profile-card {
 		background-color: antiquewhite;
-		width: clamp(10em, 80%, 25em);;
+		width: clamp(10em, 75%, 25em);
 		border-top-right-radius: 10px;
 		border-bottom-right-radius: 10px;
 		margin-bottom: 1em;
@@ -208,6 +211,11 @@ header {
 		display: grid;
 		grid-template-columns: min-content 1fr min-content;
 		grid-template-rows: 1fr 1fr;
+
+		@media (min-width: 350px) {
+			width: clamp(10em, 80%, 25em);
+			margin: 1em 1em;
+		}
 	
 		.name {
 			align-self: center;
