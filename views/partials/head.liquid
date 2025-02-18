@@ -9,15 +9,30 @@
   </head>
   <body>
 	<header>
-		<h1><a href="/">Squadpage</a></h1>
-		<a class="random-ilw" style="--fav_color: lightgray" href="https://vsheo.github.io/i-love-web/">Random I Love Web</a>
-		
-		<aside class="filters">
+		<input id='checkbox-toggle' type='checkbox'>
+        <label class="checkbox-label" for='checkbox-toggle'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></label>
+
+		<nav class="menu-hamburger" id="navbar">
 			<h2>Filters</h2>
 			<ul>
-				<li><a href="/visitekaartjes">visitekaartjes: a naar z</a></li>
-				<li><a href="/visitekaartjes/?sorteer=andersom">visitekaartjes: z naar a</a></li>
-				<li><a href="/schooljaar-2024-2025">Eerste jaars</a></li>
+				<ul>
+					<li><h3>visitekaartjes</h3></li>
+					<li><a href="/visitekaartjes">A naar Z</a></li>
+					<li><a href="/visitekaartjes/?sorteer=andersom">Z naar A</a></li>
+				</ul>
+
+				<ul>
+					<li><h3>Schooljaar</h3></li>
+					<li><a href="/schooljaar-2024-2025">Eerste jaars</a></li>
+					<li><a href="/schooljaar-2024-2025">Tweede jaars</a></li>
+				</ul>
+				
 			</ul>
-		</aside>
+		</nav>
+
+		<!-- als buiten het open hamburger menu geklikt wordt dan gaat het hamburger menu dicht. omdat de overlay en checkbox-label gekoppeld zijn aan dezelfde checkbox -->
+		<label class="overlay" for="checkbox-toggle" aria-hidden="true"></label>
+
+		<h1><a href="/">Squadpage</a></h1>
+		<!-- <a class="random-ilw" style="--fav_color: lightgray" href="{{ products }}">Random I Love Web</a> -->
 	</header>
