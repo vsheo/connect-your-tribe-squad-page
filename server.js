@@ -37,7 +37,7 @@ app.use(express.urlencoded({extended: true}))
 // Maak een GET route voor de index
 app.get('/', async function (request, response) {
   // Haal alle personen uit de WHOIS API op, van dit jaar
-  const personResponse = await fetch('https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}')
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?fields=name,squads.squad_id.name,github_handle,fav_color&filter={%22github_handle%22:{%22_neq%22:%22null%22}}')
   // En haal daarvan de JSON op
   const personResponseJSON = await personResponse.json()
 
@@ -50,7 +50,16 @@ app.get('/', async function (request, response) {
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
   response.render('index.liquid', {persons: personResponseJSON.data})
+})
 
+
+app.get('/', async function (request, response) {
+  // Haal alle personen uit de WHOIS API op, van dit jaar
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?fields=website,squads.squad_id.name&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}')
+  // En haal daarvan de JSON op
+  const personResponseJSON = await personResponse.json()
+
+  response.render('head.liquid', {website: personResponseJSON.data})
 })
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
@@ -59,6 +68,8 @@ app.post('/', async function (request, response) {
   // Er is nog geen afhandeling van POST, redirect naar GET op /
   response.redirect(303, '/')
 })
+
+
 
 // Maak een GET route voor een detailpagina met een request parameter id
 app.get('/visitekaartjes', async function (request, response) {
@@ -72,30 +83,26 @@ app.get('/visitekaartjes', async function (request, response) {
   } else {
     personURL = personURL + '?sort=name'
   }
-
-  personURL = personURL + '&fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}'
-
+  personURL = personURL + '&fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={"_and":[{"fav_color":{"_neq":"null"}},{"birthdate":{"_neq":"null"}},{"squads":{"squad_id":{"name":{"_eq":"1G"}}}}]}'
   const personResponse = await fetch(personURL)
   const personResponseJSON = await personResponse.json()
 
-
-  // const personLink = personURL + '&fields=id,website,squads.squad_id.name&filter={%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}'
-  // const LinkResponse = await fetch(personLink)
-  // const LinkResponseJSON = await LinkResponse.json()
-
-  const personLink = await fetch('https://fdnd.directus.app/items/person/?fields=id,website,squads.squad_id.name&filter={%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}')
+  
+  const personLink = await fetch('https://fdnd.directus.app/items/person/?fields=id,website,squads.squad_id.name&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}')
   const LinkResponseJSON = await personLink.json()
 
   response.render('visitekaartjes.liquid', {persons: personResponseJSON.data, website: LinkResponseJSON.data})
 })
 
 
+
 app.get('/schooljaar-2024-2025', async function (request, response) {
-  const schoolYear = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=id,name,squads.squad_id.name,squads.squad_id.cohort&filter=%7B%22_and%22:[%7B%22squads%22:%7B%22squad_id%22:%7B%22tribe%22:%7B%22name%22:%22FDND%20Jaar%201%22%7D%7D%7D%7D,%7B%22squads%22:%7B%22squad_id%22:%7B%22cohort%22:%222425%22%7D%7D%7D]%7D')
+  const schoolYear = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=id,name,squads.squad_id.name,squads.squad_id.cohort&filter={"_and":[{"squads":{"squad_id":{"tribe":{"name":"FDND Jaar 1"}}}},{"squads":{"squad_id":{"cohort":"2425"}}}]}')
   const schoolYearResponseJSON = await schoolYear.json()
 
   response.render('visitekaartjes.liquid', {persons: schoolYearResponseJSON.data})
 })
+
 
 // Stel het poortnummer in waar express op moet gaan luisteren
 app.set('port', process.env.PORT || 8000)
