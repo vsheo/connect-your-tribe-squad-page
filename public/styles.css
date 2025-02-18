@@ -1,83 +1,107 @@
 /* RESET */
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 
-	box-sizing: border-box;
-	object-fit: cover;
+    box-sizing: border-box;
+    object-fit: cover;
 
     font-family: Arial, sans-serif;
 }
 
+body {
+	background-color: #04083F;
+}
 
+
+/* ##################################### index pagina ##################################### */
 header {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: row; */
     align-items: center;
+    justify-content: space-between;
+    height: 4em;
     margin-bottom: 2em;
 
-    h1 {
-        margin: 0.5em 0;
-        a {
-            color: black;
-            text-decoration: none;
-        }
-    }
+	#checkbox-toggle {
+		position: absolute;
+		right: 100vw;
+	}
+	
+	#checkbox-toggle:checked {
+		& + .checkbox-label {
+			rotate: 90deg;
+			color: black;
+		}
+	
+		& ~ .menu-hamburger {
+			left: 0;
+			transition: left 0.5s ease-in-out;
+		}
 
-    .random-ilw {
-        margin-bottom: 1em;
-        text-decoration: none;
-        background-color: var(--fav_color);
-        color: black;
-        padding: 0.5em;
-        border-radius: 15px;
+		& ~ .overlay {
+			display: block;
+		}
+	}
+
+	.checkbox-label {
+		color: #f0f0f0;
+        cursor: pointer;
+        margin-left: 1.5em;
+        z-index: 501;
 
         &:hover {
-            filter: brightness(50%);
+            color: rgb(74, 45, 142);
         }
     }
 
-    .filters {
-        display: flex;
-        flex-direction: column;
+	.menu-hamburger {
+		display: flex;
+		flex-direction: column;
+		position: fixed;
+		left: -100%;
+		top: 0;
+		background-color: rgb(218, 149, 46);
+		transition: left 0.5s ease-in-out;
+	
+		height: 100dvh;
+		width: 15em;
+		padding-top: 4em;
+		padding-left: 2em;
+		z-index: 500;
+	
+		cursor: pointer;
+	
+	
+		ul {
+			list-style: none;
+		}
+	}
 
-        summary {
-            list-style: none;
-            cursor: pointer;
-            font-weight: bold;
-            margin-right: 10px;
-        }
+	.overlay {
+		display: none;
+		position: fixed;
+		/* top, right, bottom and left = 0 */
+		inset: 0;
 
-        h2 {
-            align-self: center;
-            margin-bottom: 0.5em;
-        }
+		background-color: rgba(0, 0, 0, 0.5);
+		/* achter het hamburger menu */
+		z-index: 499;
+		animation: overlay-transition 500ms ease-in;
+	}
 
-        ul {
-            display: flex;
-            list-style: none;
-            gap: 1em;
+    h1 {
+        margin: 0 auto;
 
-            a {
-                text-decoration: none;
-                color: black;
-                padding: 0.5em 0.5em;
-                background-color: lightgray;
-                border-radius: 15px;
-
-                /* https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness */
-                &:hover {
-                    filter: brightness(50%);
-                }
-            }
+        a {
+            color: #f0f0f0;
+            text-decoration: none;
         }
     }
 }
 
-
-
 .profile-bubble {
-    --size-circle: 8em;
+    --size-circle: 8.5em;
 
     display: flex;
     flex-direction: column;
@@ -85,17 +109,18 @@ header {
     align-items: center;
     position: absolute;
 
+    background-color: #b594fc;
     /* de fav_color uit Whois, wordt in HTML gemaakt tot een custom property, die hier gebruikt wordt */
-    background-color: var(--fav_color);
+    border: 5px solid var(--fav_color);
     width: var(--size-circle);
     aspect-ratio: 1;
     border-radius: 50%;
 
+	cursor: pointer;
     z-index: var(--z);
 
-    animation:
-    transX calc(var(--durX) * 1s) linear infinite alternate,
-    transY calc(var(--durY) * 1s) linear infinite alternate;
+    animation: transX calc(var(--durX) * 1s) linear infinite alternate,
+        transY calc(var(--durY) * 1s) linear infinite alternate;
 
     .name {
         width: 5em;
@@ -122,6 +147,7 @@ header {
     }
 }
 
+/* de class open wordt toegeveogd met js als profile-bubble geklikt wordt */
 .profile-bubble.open {
     animation: none;
     z-index: 101;
@@ -161,52 +187,58 @@ header {
     }
 }
 
-.profile-card {
-    background-color: antiquewhite;
-    width: 15em;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-bottom: 1em;
-    margin-left: 1em;
-    padding: 0.5em 0;
-    padding-left: 0.3em;
-    border-left: 7px solid var(--fav_color);
 
-    display: grid;
-    grid-template-columns: min-content 1fr min-content;
-    grid-template-rows: 1fr 1fr;
 
-    .name {
-        align-self: center;
-    }
 
-    .squad {
-        align-self: center;
-        padding-right: 1em;
-    }
 
-    .website {
-        grid-area: 2 / 2;
-        align-self: center;
-        text-wrap: nowrap;
-    }
-}
+
+
+
+
+
+
+
+
 
 
 @keyframes transX {
     0% {
-      translate:0;
+        translate: 0;
     }
     100% {
-      translate:calc(100dvw - var(--size-circle));
+        translate: calc(100dvw - var(--size-circle));
     }
-  }
-  
-  @keyframes transY {
+}
+
+@keyframes transY {
     0% {
-      transform:translatey(0);
+        transform: translatey(0);
     }
     100% {
-      transform:translatey( calc(100dvh - var(--size-circle) - 15em) );
+        transform: translatey(calc(100dvh - var(--size-circle) - 15em));
     }
-  }
+}
+
+@keyframes overlay-transition {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+
+.random-ilw {
+    margin-bottom: 1em;
+    text-decoration: none;
+    background-color: var(--fav_color);
+    color: black;
+    padding: 0.5em;
+    border-radius: 15px;
+
+    &:hover {
+        filter: brightness(50%);
+    }
+}
