@@ -198,6 +198,10 @@ header {
 	}
 
 	.profile-card {
+        display: grid;
+		grid-template-columns: min-content 1fr min-content;
+		grid-template-rows: repeat(4, min-content);
+
 		background-color: antiquewhite;
 		width: clamp(10em, 75%, 25em);
 		border-top-right-radius: 10px;
@@ -207,16 +211,12 @@ header {
 		padding: 0.5em 0;
 		padding-left: 0.3em;
 		border-left: 7px solid var(--fav_color);
-	
-		display: grid;
-		grid-template-columns: min-content 1fr min-content;
-		grid-template-rows: 1fr 1fr;
 
 		@media (min-width: 350px) {
 			width: clamp(10em, 80%, 25em);
 			margin: 1em 1em;
 		}
-	
+
 		.name {
 			align-self: center;
 		}
@@ -225,13 +225,62 @@ header {
 			align-self: center;
 			padding-right: 1em;
 		}
-	
+
+        .bio {
+            grid-area: 2 /2;
+            padding: 0.5em 0;
+        }
+
 		.website {
-			grid-area: 2 / 2;
-			align-self: center;
-			text-wrap: nowrap;
+            grid-area: 3 /2;
+            padding: 0.5em 0;
 		}
+
+        .drop-down {
+            all: unset;
+            grid-column: 2;
+            height: min-content;
+            width: min-content;
+            align-self: center;
+            justify-self: center;
+            scale: 1.5;
+
+            &:active {
+                transform: scale(0.8) translate(-10%, 10%);
+            }
+        }
+
+        .favo {
+            display: none;
+        }
 	}
+
+    /* toggle de class 'open' met JS (openDropDown) */
+    .profile-card.open {
+        height: 30em;
+        grid-template-rows: repeat(auto-fit, minmax(min-content, auto));
+
+        .favo {
+            grid-column: 2;
+            display: block;
+            padding: 0.2em 0;
+        }
+
+        .kleur {
+            .kleur-preview {
+                display: inline-block;
+                height: 1em;
+                width: 1em;
+                border: 1px solid black;
+                background-color: var(--fav_color);
+            }
+        }
+
+        .drop-down {
+            rotate: 180deg;
+            color: var(--fav_color);
+        }
+    }
 }
 
 

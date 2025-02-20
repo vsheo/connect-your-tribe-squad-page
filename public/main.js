@@ -1,3 +1,5 @@
+// ************************************** index **************************************
+
 // selecteer alle cirkels
 cirkels = document.querySelectorAll(".profile-bubble")
 
@@ -31,3 +33,25 @@ function setPropertyXY() {
     });
 }
 
+
+// ************************************** detail pagina **************************************
+// drop down op de profile kaartjes
+const dropDownButton = document.querySelectorAll('.drop-down')
+const openItem = document.querySelector('.profile-card')
+const favoHidden = document.querySelectorAll('.favo')
+
+
+openDropDown()
+
+
+function openDropDown() {
+    // event listener op alle dropdown buttons
+    dropDownButton.forEach(button => {
+        button.addEventListener('click', (e) => {
+            // zoek de parent container van de geklikte dropdown button
+            const parentContainer = e.target.closest('.profile-card');
+            // toggle de class open
+            parentContainer.classList.toggle('open');
+        });
+    });
+};
