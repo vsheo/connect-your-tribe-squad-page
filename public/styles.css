@@ -227,7 +227,6 @@ header {
 	.profile-card {
         display: grid;
 		grid-template-columns: min-content 1fr min-content;
-		grid-template-rows: repeat(4, min-content);
 
 		background-color: antiquewhite;
 		width: clamp(10em, 75%, 25em);
@@ -285,15 +284,14 @@ header {
     /* toggle de class 'open' met JS (openDropDown) */
     .profile-card.open {
         height: 30em;
-        grid-template-rows: repeat(auto-fit, minmax(min-content, auto));
 
         .favo {
             grid-column: 2;
             display: block;
-            padding: 0.2em 0;
         }
 
         .kleur {
+            margin-bottom: 0.3em;
             .kleur-preview {
                 display: inline-block;
                 height: 1em;
