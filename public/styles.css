@@ -14,7 +14,7 @@ body {
 }
 
 
-/* ##################################### index pagina ##################################### */
+/* ##################################### header + menu ##################################### */
 header {
     display: flex;
     /* flex-direction: row; */
@@ -100,90 +100,117 @@ header {
     }
 }
 
-.profile-bubble {
-    --size-circle: 8.5em;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-
-    background-color: #b594fc;
-    /* de fav_color uit Whois, wordt in HTML gemaakt tot een custom property, die hier gebruikt wordt */
-    border: 5px solid var(--fav_color);
-    width: var(--size-circle);
-    aspect-ratio: 1;
-    border-radius: 50%;
-
-	cursor: pointer;
-    z-index: var(--z);
-
-    animation: transX calc(var(--durX) * 1s) linear infinite alternate,
-        transY calc(var(--durY) * 1s) linear infinite alternate;
-
-    .name {
-        width: 5em;
-        text-wrap: wrap;
-        text-align: center;
-        color: white;
+/* ##################################### index pagina ##################################### */
+.index-main {
+    #tint {
+        position: absolute;
+        right: 100vw;
     }
 
-    .squad {
-        display: none;
-        color: white;
+    #tint:checked {
+		& ~ .tinted-background {
+            display: block;
+		}
+	}
+
+    .tinted-background {
+		display: none;
+		position: fixed;
+		/* top, right, bottom and left = 0 */
+		inset: 0;
+
+		background-color: rgba(0, 0, 0, 0.5);
+		/* achter profile-bubble */
+		z-index: 99;
+		animation: overlay-transition 500ms ease-in;
+	}
+
+    .profile-bubble {
+        --size-circle: 8.5em;
+    
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+    
+        background-color: #b594fc;
+        /* de fav_color uit Whois, wordt in HTML gemaakt tot een custom property, die hier gebruikt wordt */
+        border: 5px solid var(--fav_color);
+        width: var(--size-circle);
+        aspect-ratio: 1;
+        border-radius: 50%;
+    
+        cursor: pointer;
+        z-index: var(--z);
+    
+        animation: transX calc(var(--durX) * 1s) linear infinite alternate,
+            transY calc(var(--durY) * 1s) linear infinite alternate;
+    
+        .name {
+            width: 5em;
+            text-wrap: wrap;
+            text-align: center;
+            color: white;
+        }
+    
+        .squad {
+            display: none;
+            color: white;
+        }
+    
+        .website {
+            display: none;
+            color: white;
+        }
+    
+        /* stop animatie bij een hover */
+        /* https://stackoverflow.com/questions/75906720/how-to-make-css-animation-slows-down-to-stop-on-hover-and-continue-moving-infin */
+        &:hover {
+            animation-play-state: paused;
+            filter: brightness(1.2);
+        }
     }
-
-    .website {
-        display: none;
-        color: white;
-    }
-
-    /* stop animatie bij een hover */
-    /* https://stackoverflow.com/questions/75906720/how-to-make-css-animation-slows-down-to-stop-on-hover-and-continue-moving-infin */
-    &:hover {
-        animation-play-state: paused;
-        filter: brightness(1.2);
-    }
-}
-
-/* de class open wordt toegeveogd met js als profile-bubble geklikt wordt */
-.profile-bubble.open {
-    animation: none;
-    z-index: 101;
-
-    height: 8em;
-    width: 20em;
-    border-radius: 15px;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    display: grid;
-    grid-template-columns: min-content 1fr 4em;
-    grid-template-rows: 1fr 1fr;
-
-    svg {
-        align-self: end;
-    }
-
-    .name {
-        text-wrap: nowrap;
-        align-self: end;
-        margin-left: 1em;
-    }
-
-    .squad {
-        display: block;
-        align-self: end;
-    }
-
-    .website {
-        display: block;
-        grid-area: 2 / 2;
-        text-wrap: nowrap;
-        margin-left: 1em;
+    
+    /* de class open wordt toegeveogd met js als profile-bubble geklikt wordt */
+    .profile-bubble.open {
+        animation: none;
+        z-index: 101;
+    
+        height: 8em;
+        width: 20em;
+        border-radius: 15px;
+    
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    
+        display: grid;
+        grid-template-columns: min-content 1fr 4em;
+        grid-template-rows: 1fr 1fr;
+    
+        svg {
+            align-self: end;
+        }
+    
+        .name {
+            text-wrap: nowrap;
+            align-self: end;
+            margin-left: 1em;
+        }
+    
+        .squad {
+            display: block;
+            align-self: end;
+        }
+    
+        .website {
+            display: block;
+            grid-area: 2 / 2;
+            text-wrap: nowrap;
+            margin-left: 1em;
+        }
     }
 }
 
