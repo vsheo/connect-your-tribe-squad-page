@@ -65,7 +65,7 @@ header {
 		transition: left 0.5s ease-in-out;
 	
 		height: 100dvh;
-		width: 15em;
+		width: 12em;
 		padding-top: 4em;
 		padding-left: 2em;
 		z-index: 500;
@@ -75,6 +75,11 @@ header {
 	
 		ul {
 			list-style: none;
+            margin-top: 1em;
+
+            a {
+                margin-left: 0.5em;
+            }
 		}
 	}
 
