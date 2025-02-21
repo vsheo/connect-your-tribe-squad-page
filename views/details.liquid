@@ -23,19 +23,19 @@
 		<span class="favo kleur">Dit <div class="kleur-preview"></div> is mijn favoriete kleur.</span>
 
 		{% if person.fav_kitchen %}
-		<span class="favo gerecht">Ik hou ervan om {{ person.fav_kitchen }} te eten.</span>
+		<span class="favo">Ik hou ervan om {{ person.fav_kitchen }} te eten.</span>
 		{% endif %}
 
 		{% if person.fav_coffee %}
-		<span class="favo koffie">Mijn dag kan ik niet beginnen zonder een {{ person.fav_coffee }}</span>
+		<span class="favo">Mijn dag kan ik niet beginnen zonder een {{ person.fav_coffee }}</span>
 		{% endif %}
 
 		{% if person.fav_animal %}
-		<span class="favo dier">Ik zou heel graag een {{ person.fav_animal }} als huis dier willen hebben</span>
+		<span class="favo">Ik zou heel graag een {{ person.fav_animal }} als huis dier willen hebben</span>
 		{% endif %}
 
 		{% if person.fav_emoji %}
-		<span class="favo emoji">En mijn favorite emoji is {{ person.fav_emoji }}</span>
+		<span class="favo">En mijn favorite emoji is {{ person.fav_emoji }}</span>
 		{% endif %}
 
 		<button class="drop-down"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ person.fav_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
