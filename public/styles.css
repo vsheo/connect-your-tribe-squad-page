@@ -283,11 +283,12 @@ header {
 
     /* toggle de class 'open' met JS (openDropDown) */
     .profile-card.open {
-        height: 30em;
+        height: min-content;
 
         .favo {
             grid-column: 2;
             display: block;
+            padding: 0.5em 0;
         }
 
         .kleur {
