@@ -51,7 +51,7 @@ header {
         z-index: 501;
 
         &:hover {
-            color: rgb(74, 45, 142);
+            color: rgb(218, 149, 46);
         }
     }
 
@@ -146,7 +146,15 @@ header {
         z-index: var(--z);
     
         animation: transX calc(var(--durX) * 1s) linear infinite alternate,
-            transY calc(var(--durY) * 1s) linear infinite alternate;
+            transY calc(var(--durY) * 1s) linear infinite alternate
+        ;
+        
+        /* stop animatie bij een hover */
+        /* https://stackoverflow.com/questions/75906720/how-to-make-css-animation-slows-down-to-stop-on-hover-and-continue-moving-infin */
+        &:hover {
+            animation-play-state: paused;
+            filter: brightness(1.2);
+        }
     
         .name {
             width: 5em;
@@ -164,13 +172,11 @@ header {
             display: none;
             color: white;
         }
-    
-        /* stop animatie bij een hover */
-        /* https://stackoverflow.com/questions/75906720/how-to-make-css-animation-slows-down-to-stop-on-hover-and-continue-moving-infin */
-        &:hover {
-            animation-play-state: paused;
-            filter: brightness(1.2);
+
+        iframe {
+            display: none;
         }
+
     }
     
     /* de class open wordt toegeveogd met js als profile-bubble geklikt wordt */
@@ -210,6 +216,12 @@ header {
             grid-area: 2 / 2;
             text-wrap: nowrap;
             margin-left: 1em;
+        }
+        
+        iframe {
+            display: block;
+            height: 10em;
+            width: 10em;
         }
     }
 }
@@ -310,8 +322,11 @@ header {
 }
 
 
+/* ##################################### filter pagina ##################################### */
 
-
+.data {
+    color: var(--fav_color)
+}
 
 
 

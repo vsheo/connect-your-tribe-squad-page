@@ -77,20 +77,39 @@ app.get('/details', async function (request, response) {
   const personResponse = await fetch(personURL)
   const personResponseJSON = await personResponse.json()
 
-  
-  // const personLink = await fetch('https://fdnd.directus.app/items/person/?fields=id,website,squads.squad_id.name&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}')
-  // const LinkResponseJSON = await personLink.json()
-
   response.render('details.liquid', {persons: personResponseJSON.data})
 })
 
 
+app.get('/gerecht', async function (request, response) {
+  const coffee = await fetch('https://fdnd.directus.app/items/person/?fields=name,squads.squad_id.name,fav_color,fav_kitchen&filter={"_and":[{"fav_kitchen":{"_neq":"null"}},{"squads":{"squad_id":{"name":{"_eq":"1G"}}}}]}')
+  const coffeeResponseJSON = await coffee.json()
 
-app.get('/schooljaar-2024-2025', async function (request, response) {
-  const schoolYear = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=id,name,squads.squad_id.name,squads.squad_id.cohort&filter={"_and":[{"squads":{"squad_id":{"tribe":{"name":"FDND Jaar 1"}}}},{"squads":{"squad_id":{"cohort":"2425"}}}]}')
-  const schoolYearResponseJSON = await schoolYear.json()
+  response.render('filter.liquid', {persons: coffeeResponseJSON.data})
+})
 
-  response.render('details.liquid', {persons: schoolYearResponseJSON.data})
+
+app.get('/coffee', async function (request, response) {
+  const coffee = await fetch('https://fdnd.directus.app/items/person/?fields=name,squads.squad_id.name,fav_color,fav_coffee&filter={"_and":[{"fav_coffee":{"_neq":"null"}},{"squads":{"squad_id":{"name":{"_eq":"1G"}}}}]}')
+  const coffeeResponseJSON = await coffee.json()
+
+  response.render('filter.liquid', {persons: coffeeResponseJSON.data})
+})
+
+
+app.get('/dier', async function (request, response) {
+  const coffee = await fetch('https://fdnd.directus.app/items/person/?fields=name,squads.squad_id.name,fav_color,fav_animal&filter={"_and":[{"fav_animal":{"_neq":"null"}},{"squads":{"squad_id":{"name":{"_eq":"1G"}}}}]}')
+  const coffeeResponseJSON = await coffee.json()
+
+  response.render('filter.liquid', {persons: coffeeResponseJSON.data})
+})
+
+
+app.get('/emoji', async function (request, response) {
+  const coffee = await fetch('https://fdnd.directus.app/items/person/?fields=name,squads.squad_id.name,fav_color,fav_emoji&filter={"_and":[{"fav_emoji":{"_neq":"null"}},{"squads":{"squad_id":{"name":{"_eq":"1G"}}}}]}')
+  const coffeeResponseJSON = await coffee.json()
+
+  response.render('filter.liquid', {persons: coffeeResponseJSON.data})
 })
 
 
