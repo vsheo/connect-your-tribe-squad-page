@@ -41,22 +41,12 @@ app.get('/', async function (request, response) {
   // En haal daarvan de JSON op
   const personResponseJSON = await personResponse.json()
 
-  // id, name, fav color en birthdate die niet null zijn
-  // https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}
-
-  // personResponseJSON bevat gegevens van alle personen uit alle squads van dit jaar
-  // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
-
-  // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
-  // Geef ook de eerder opgehaalde squad data mee aan de view
   response.render('index.liquid', {persons: personResponseJSON.data})
 })
 
 
 app.get('/', async function (request, response) {
-  // Haal alle personen uit de WHOIS API op, van dit jaar
   const personResponse = await fetch('https://fdnd.directus.app/items/person/?fields=website,squads.squad_id.name&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}')
-  // En haal daarvan de JSON op
   const personResponseJSON = await personResponse.json()
 
   response.render('head.liquid', {website: personResponseJSON.data})
@@ -72,7 +62,7 @@ app.post('/', async function (request, response) {
 
 
 // Maak een GET route voor een detailpagina met een request parameter id
-app.get('/visitekaartjes', async function (request, response) {
+app.get('/details', async function (request, response) {
   // const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/?fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={%22_and%22:[{%22fav_color%22:{%22_neq%22:%22null%22}},{%22birthdate%22:{%22_neq%22:%22null%22}},{%22squads%22:{%22squad_id%22:{%22name%22:{%22_eq%22:%221G%22}}}}]}')
   
   let personURL = 'https://fdnd.directus.app/items/person/';
@@ -83,15 +73,15 @@ app.get('/visitekaartjes', async function (request, response) {
   } else {
     personURL = personURL + '?sort=name'
   }
-  personURL = personURL + '&fields=id,name,squads.squad_id.name,fav_color,birthdate&filter={"_and":[{"fav_color":{"_neq":"null"}},{"birthdate":{"_neq":"null"}},{"squads":{"squad_id":{"name":{"_eq":"1G"}}}}]}'
+  personURL = personURL + '&fields=name,squads.squad_id.name,bio,website,fav_color,fav_kitchen,fav_coffee,fav_animal,fav_emoji&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}'
   const personResponse = await fetch(personURL)
   const personResponseJSON = await personResponse.json()
 
   
-  const personLink = await fetch('https://fdnd.directus.app/items/person/?fields=id,website,squads.squad_id.name&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}')
-  const LinkResponseJSON = await personLink.json()
+  // const personLink = await fetch('https://fdnd.directus.app/items/person/?fields=id,website,squads.squad_id.name&filter={"squads":{"squad_id":{"name":{"_eq":"1G"}}}}')
+  // const LinkResponseJSON = await personLink.json()
 
-  response.render('visitekaartjes.liquid', {persons: personResponseJSON.data, website: LinkResponseJSON.data})
+  response.render('details.liquid', {persons: personResponseJSON.data})
 })
 
 
@@ -100,7 +90,7 @@ app.get('/schooljaar-2024-2025', async function (request, response) {
   const schoolYear = await fetch('https://fdnd.directus.app/items/person/?sort=name&fields=id,name,squads.squad_id.name,squads.squad_id.cohort&filter={"_and":[{"squads":{"squad_id":{"tribe":{"name":"FDND Jaar 1"}}}},{"squads":{"squad_id":{"cohort":"2425"}}}]}')
   const schoolYearResponseJSON = await schoolYear.json()
 
-  response.render('visitekaartjes.liquid', {persons: schoolYearResponseJSON.data})
+  response.render('details.liquid', {persons: schoolYearResponseJSON.data})
 })
 
 
