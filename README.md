@@ -68,6 +68,11 @@ JavaScript wordt ook gebruikt om drie willekeurige getallen tussen 0 en 100 te g
 
 ## Installatie
 <!-- Bij Installatie staat stap-voor-stap beschreven hoe je de development omgeving moet inrichten om aan de repository te kunnen werken. -->
+* Zorg ervoor dat je [Node.js](https://nodejs.org/) op je computer hebt geïnstalleerd
+* Fork en clone de repository
+* Open de terminal en ga naar de map van de repository
+* Installeer dependencies met "npm install"
+* Om de website lokaal te testen, gebruik "npm start"
 
 ## Gebruik
 
