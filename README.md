@@ -65,6 +65,16 @@ JavaScript wordt gebruikt om te luisteren naar een klik op een cirkel. Wanneer e
 
 JavaScript wordt ook gebruikt om drie willekeurige getallen tussen 0 en 100 te genereren. Twee van deze getallen worden gebruikt in de keyframes om de snelheid van de animatie te bepalen. Het derde getal wordt gebruikt om elke cirkel een andere z-index te geven. Hierdoor krijgen de cirkels steeds een andere volgorde. deze 3 getallen worden als custom properties meegegeven aan de cirkels, waardoor elke cirkel in een andere richting zal bewegen, deze custom properties veranderen bij elke refresh van de pagina.
 
+### Responsive
+#### index pagina
+Als de animatie van de cirkels aan is, blijven de cirkels binnen het scherm door gebruik te maken van dvh en dvw (dynamic viewport height en dynamic viewport width). De breedte van de cirkels is opgeslagen in een custom property. In de keyframes wordt calc gebruikt voor de translate: calc(100dvh - var(--size-circle)). Dit zorgt ervoor dat de cirkel naar het randje van het scherm beweegt. Voor de horizontale animatie wordt er een extra 5em in de calc afgetrokken, wat voorkomt dat de cirkels buiten het scherm gaan en er een horizontale scrollbar verschijnt.
+
+#### details pagina
+Door gebruik te maken van een grid-layout die automatisch nieuwe kolommen toevoegt wanneer er genoeg ruimte is. Dit wordt gedaan met de repeat en minmax functies in CSS.
+
+repeat zorgt ervoor dat het grid automatisch kolommen toevoegt en de breedte van de kolommen aanpast. auto-fit zorgt ervoor dat de kolommen automatisch worden ingevuld op basis van de beschikbare ruimte. minmax kijkt als er genoeg ruimte is voor een nieuwe kolom. Dit zorgt ervoor dat het aantal kolommen zelf gemaakt worden afhankelijk van de schermgrootte, waardoor de layout flexibel is en zich goed aanpast aan verschillende schermformaten.
+https://github.com/vsheo/connect-your-tribe-squad-page/blob/bb30a046605e5740335f82601d6f63e177afd1a9/public/styles.css#L231
+
 
 ## Installatie
 <!-- Bij Installatie staat stap-voor-stap beschreven hoe je de development omgeving moet inrichten om aan de repository te kunnen werken. -->
