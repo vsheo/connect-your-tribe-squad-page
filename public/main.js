@@ -1,7 +1,7 @@
 // ************************************** index **************************************
 
 // selecteer alle cirkels
-cirkels = document.querySelectorAll(".profile-bubble")
+let cirkels = document.querySelectorAll(".profile-bubble")
 
 // genereer nieuwe custom properties
 setPropertyXY()

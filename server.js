@@ -113,6 +113,20 @@ app.get('/emoji', async function (request, response) {
 })
 
 
+// route voor een post
+let messages = []
+
+app.get('/berichten', async function (request, response) {
+  response.render('messages.liquid', {messages: messages})
+})
+
+app.post('/berichten', async function (request, response) {
+  console.log(request.body.tekstje)
+  messages.push(request.body.tekstje);
+
+  response.redirect(303, '/berichten')
+})
+
 // Stel het poortnummer in waar express op moet gaan luisteren
 app.set('port', process.env.PORT || 8000)
 
